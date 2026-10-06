@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import PaymentButton from "./PaymentButton";
 
 function ProductCard() {
   const [products, setProducts] = useState([]);
@@ -9,9 +10,9 @@ function ProductCard() {
         style: "currency",
         currency: currency || "INR",
         maximumFractionDigits: 2,
-      }).format(amount/100);
+      }).format(amount / 100);
     } catch {
-      return `${amount.toLocaleString("en-IN")}`
+      return `${amount.toLocaleString("en-IN")}`;
     }
   };
 
@@ -39,10 +40,13 @@ function ProductCard() {
             <p className="description">{products.description}</p>
 
             <div className="price">
-              {formatPrice((products.price?.amount) ?? 0, products.price?.currency)}
+              {formatPrice(
+                products.price?.amount ?? 0,
+                products.price?.currency,
+              )}
             </div>
 
-            <button>Buy Now</button>
+            <PaymentButton />
           </div>
         </div>
       ))}
